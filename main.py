@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify
 from google import genai
 from google.genai import types
 from PIL import Image
@@ -8,8 +8,8 @@ import os
 
 app = Flask(__name__)
 
-# Google APIキーを環境変数から取得
-genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+# API KEYを使用せず、GCPのデフォルト認証情報を使用
+# Cloud Runのサービスアカウントに適切な権限が付与されている必要があります
 
 @app.route('/generate-image', methods=['POST'])
 def generate_image():
