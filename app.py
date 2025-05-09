@@ -72,7 +72,7 @@ async def generate_content(request: GeminiRequest):
         
         # リクエスト設定
         generation_config = {
-            "generationConfig":{"responseModalities":["TEXT","IMAGE"]},
+            "responseModalities":["TEXT","IMAGE"],
             "temperature": request.temperature,
             "max_output_tokens": request.max_output_tokens
         }
