@@ -21,7 +21,7 @@ app = FastAPI(title="Gemini API Proxy")
 class GeminiRequest(BaseModel):
     prompt: str
     model: Optional[str] = None  # モデル名をパラメータとして追加
-    responseModalities: List[Literal["TEXT", "IMAGE"]] = ["TEXT", "IMAGE"]
+    responseModalities: Optional[List[str]] = ["TEXT", "IMAGE"]  # レスポンスモダリティ
     temperature: float = 0.7
     max_output_tokens: int = 2048
     json_mode: bool = False
