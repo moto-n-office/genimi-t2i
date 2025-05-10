@@ -22,7 +22,7 @@ app = FastAPI(title="Gemini API Proxy")
 class GeminiRequest(BaseModel):
     prompt: str
     model: Optional[str] = None
-    responseModalities: Optional[List[str]] = ["TEXT", "IMAGE"]
+    response_modalities: Optional[List[str]] = ["TEXT", "IMAGE"]
     temperature: float = 0.7
     max_output_tokens: int = 2048
     json_mode: bool = False
@@ -76,7 +76,7 @@ async def generate_content(request: GeminiRequest):
         
         # リクエスト設定
         generation_config = {
-            "responseModalities": request.responseModalities,
+            "response_modalities": request.responseModalities,
             "temperature": request.temperature,
             "max_output_tokens": request.max_output_tokens
         }
