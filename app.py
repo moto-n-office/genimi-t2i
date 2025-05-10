@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, Dict, Any, List
 import vertexai
 from vertexai.generative_models import GenerativeModel
+import random  # 追加
 
 # 環境変数の取得
 PROJECT_ID = os.getenv("PROJECT_ID")
@@ -20,19 +21,21 @@ app = FastAPI(title="Gemini API Proxy")
 # リクエスト用のモデル定義
 class GeminiRequest(BaseModel):
     prompt: str
-    model: Optional[str] = None  # モデル名をパラメータとして追加
-    responseModalities: Optional[List[str]] = ["TEXT", "IMAGE"]  # レスポンスモダリティ
+    model: Optional[str] = None
+    responseModalities: Optional[List[str]] = ["TEXT", "IMAGE"]
     temperature: float = 0.7
     max_output_tokens: int = 2048
     json_mode: bool = False
     json_schema: Optional[Dict[str, Any]] = None
+    seed: Optional[int] = None  # seed値を追加
 
 # レスポンス用のモデル定義
 class GeminiResponse(BaseModel):
     text: str
-    model: str  # 使用されたモデル
-    tokens: Optional[Dict[str, int]] = None  # トークン数情報
+    model: str
+    tokens: Optional[Dict[str, int]] = None
     json_data: Optional[Dict[str, Any]] = None
+    seed: Optional[int] = None  # 使用したseed値を追加
 
 @app.post("/generate", response_model=GeminiResponse)
 async def generate_content(request: GeminiRequest):
