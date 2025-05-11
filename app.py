@@ -6,6 +6,7 @@ from typing import Optional, Dict, Any, List
 import vertexai
 from vertexai.generative_models import GenerativeModel
 import random  # 追加
+from google.genai.types import GenerateContentConfig
 
 # 環境変数の取得
 PROJECT_ID = os.getenv("PROJECT_ID")
@@ -73,18 +74,21 @@ async def generate_content(request: GeminiRequest):
             ]
         else:
             contents = [request.prompt]
-        
+
+        config = GenerateContentConfig(response_modalities=['Text', 'Image'])
+
         # リクエスト設定
-        generation_config = {
-            # "response_modalities": request.response_modalities,
-            "temperature": request.temperature,
-            "max_output_tokens": request.max_output_tokens
-        }
-        
+        # generation_config = {
+        #     # "response_modalities": request.response_modalities,
+        #     "temperature": request.temperature,
+        #     "max_output_tokens": request.max_output_tokens
+        # }
+
         # コンテンツ生成
         response = model.generate_content(
             contents=contents,
-            generation_config=generation_config
+            # generation_config=generation_config
+            generation_config=config
         )
         
         # トークン数情報の取得
