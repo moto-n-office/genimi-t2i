@@ -91,6 +91,12 @@ async def generate_content(request: GeminiRequest):
             generation_config=config
         )
         
+        response = client.models.generate_content(
+            model=DEFAULT_GEMINI_MODEL,
+            contents="走っている競走馬の画像を生成して、競馬の魅力を伝えるような1文のキャッチコピーを作成して。",
+            config=config,
+        )
+        
         # トークン数情報の取得
         token_info = {}
         try:
