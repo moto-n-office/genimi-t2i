@@ -160,8 +160,8 @@ async def generate_content(request: GeminiRequest):
 async def get_available_models():
     # 利用可能なモデルのリスト
     available_models = [
-        {"id": "gemini-2.0-flash-001", "description": "Gemini 2.0 Flash - 高速レスポンス向き"},
-        {"id": "gemini-2.5-flash-preview-04-17", "description": "Gemini-2.5-flash最新プレビューバージョン"},
+        {"id": "gemini-2.0-flash", "description": "Gemini 2.0 Flash - 高速レスポンス向き"},
+        {"id": "gemini-2.5-flash", "description": "Gemini-2.5-flash最新プレビューバージョン"},
         {"id": "gemini-2.0-flash-preview-image-generation", "description": "gemini-2.0-flash-preview-image-generation - 画像生成プレビューバージョン"}
     ]
     return {"models": available_models, "default_model": DEFAULT_GEMINI_MODEL}
